@@ -5,25 +5,41 @@
     </header>
     <ul>
       <friend-contact
-        name="file1.pdf"
-        phone-number="111 111 1111"
-        email-address="manuel@localhost.com"
-        is-favorite="1"
-        description="some data"    
-      ></friend-contact>
-      <friend-contact
-        name="file2.pdf"
-        phone-number="222 222 2222"
-        email-address="@localhost.com"
-        is-favorite="1"
-        description="some data 2"   
+        v-for="file in files"
+        :key="file.id"
+        :name="file.name"
+        :phone-number="file.phone"
+        :email-address="file.email"
+        :is-favorite="true"
+        :description="file.description"  
       ></friend-contact>
     </ul>
   </section>
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      files: [
+        {
+          id: "1",
+          name: "file1",
+          phone: "111 111 1111",
+          email: "manuel@localhost.com",
+          description: "some data"
+        },
+        {
+          id: "2",
+          name: "file2",
+          phone: "222 222 2222",
+          email: "julie@localhost.com",
+          description: "some data2"
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style>

@@ -1,17 +1,18 @@
 <template>
   <section>
     <header>
-      <h1>Admin File Management Panel</h1>
+      <h1>My Friends</h1>
     </header>
     <ul>
       <friend-contact
-        v-for="file in files"
-        :key="file.id"
-        :name="file.name"
-        :phone-number="file.phone"
-        :email-address="file.email"
-        :is-favorite="true"
-        :description="file.description"  
+        v-for="friend in friends"
+        :key="friend.id"
+        :id="friend.id"
+        :name="friend.name"
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favorite="friend.isFavorite"
+        @toggle-favorite="toggleFavoriteStatus"
       ></friend-contact>
     </ul>
   </section>
@@ -21,23 +22,31 @@
 export default {
   data() {
     return {
-      files: [
+      friends: [
         {
-          id: "1",
-          name: "file1",
-          phone: "111 111 1111",
-          email: "manuel@localhost.com",
-          description: "some data"
+          id: 'manuel',
+          name: 'Manuel Lorenz',
+          phone: '0123 45678 90',
+          email: 'manuel@localhost.com',
+          isFavorite: true,
         },
         {
-          id: "2",
-          name: "file2",
-          phone: "222 222 2222",
-          email: "julie@localhost.com",
-          description: "some data2"
+          id: 'julie',
+          name: 'Julie Jones',
+          phone: '0987 654421 21',
+          email: 'julie@localhost.com',
+          isFavorite: false,
         },
       ],
     };
+  },
+  methods: {
+    toggleFavoriteStatus(friendId) {
+      const identifiedFriend = this.friends.find(
+        (friend) => friend.id === friendId
+      );
+      identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+    },
   },
 };
 </script>
@@ -47,7 +56,7 @@ export default {
   box-sizing: border-box;
 }
 html {
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 body {
   margin: 0;
